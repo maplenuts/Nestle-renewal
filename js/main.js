@@ -1,53 +1,48 @@
 $(document).ready(function () {
 
-    let header = $("#header");
-    $(".lnb, .lnbBg").hide();
-
-    header.mouseenter(function () {
-        header.addClass("active");
-        let subMenu = $(".lnb");
-        subMenu.stop().fadeIn();
-        $("#header h1 a img").attr("src", "img/common/nestleLogo_brown.png");
-        $("#gnb > li > a").css({ "color": "#111" });
-        $(".lnb li a").css({ "color": "#333" });
+    $(".lnb, .lnbBg, .searchBox").hide();
+    $("#header").mouseenter(function () {
+        $("#header, #gnb").addClass("active");
+        $(".lnb").stop().fadeIn();
         $(".lnbBg").stop().slideDown(500);
-        $(".lnb > li").hover(
-            function () {
-                $(this).find("a").css("color", "var(--blue)");
-            },
-            function () {
-                $(this).find("a").css("color", "#111"); // 원래 색상으로 복원
-            }
-        );
+        $("#header h1 a img").attr("src", "img/common/nestleLogo_brown.png");
         $(".search img").attr("src", "img/common/btnSearch_fill.png");
         $(".lang img").attr("src", "img/common/btnLang_fill.png");
         $(".sitemap img").attr("src", "img/common/btnSitemap_fill.png");
-    });
+    })
 
-    header.mouseleave(function () {
-        header.removeClass("active");
-        let subMenu = $(".lnb");
-        subMenu.stop().fadeOut(420);
+    $("#header").mouseleave(function () {
+        $("#header, #gnb").removeClass("active");
+        $(".lnb").stop().fadeOut(150);
+        $(".lnbBg").stop().slideUp(200);
         $("#header h1 a img").attr("src", "img/common/nestleLogo_white.png");
-        $("#gnb > li > a").css({ "color": "#fff" });
-        $(".lnb li a").css({ "color": "#fff" });
-        $(".lnbBg").stop().slideUp(0);
         $(".search img").attr("src", "img/common/btnSearch.png");
         $(".lang img").attr("src", "img/common/btnLang.png");
         $(".sitemap img").attr("src", "img/common/btnSitemap.png");
-    });
+        
+        if (!$("#header").hasClass("active")) {
+            $("#header, #gnb").removeClass("active");
+            $(".lnb").stop().fadeOut(150);
+            $(".lnbBg").stop().slideUp(200);
+            $("#header h1 a img").attr("src", "img/common/nestleLogo_white.png");
+            $(".search img").attr("src", "img/common/btnSearch.png");
+            $(".lang img").attr("src", "img/common/btnLang.png");
+            $(".sitemap img").attr("src", "img/common/btnSitemap.png");
+        }
+    })
 
-    // search 영역
-    $(".searchBox").hide();
     $(".search").click(function () {
-        header.addClass("active");
+        $("#header").addClass("active");
         $(".searchBox").fadeIn();
-        $("#fp-nav").fadeOut();
-    });
+    })
+
     $(".sch_close").click(function () {
-        $(".searchBox").fadeOut();
-        $("#fp-nav").fadeIn();
-    });
+        $("#header").removeClass("active");
+        $(".lnb").stop().fadeOut(0);
+        $(".lnbBg").stop().slideUp(0);
+        $(".searchBox").fadeOut(0);
+    })
+
 
     // brand
     $(".brandBg li").hide();
