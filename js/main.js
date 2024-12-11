@@ -12,6 +12,13 @@ $(document).ready(function () {
     })
 
     $("#header").mouseleave(function () {
+        $("#header, #gnb").removeClass("active");
+        $(".lnb").stop().fadeOut(150);
+        $(".lnbBg").stop().slideUp(200);
+        $("#header h1 a img").attr("src", "img/common/nestleLogo_white.png");
+        $(".search img").attr("src", "img/common/btnSearch.png");
+        $(".lang img").attr("src", "img/common/btnLang.png");
+        $(".sitemap img").attr("src", "img/common/btnSitemap.png");
 
         if (!$("#header").hasClass("active")) {
             $("#header, #gnb").removeClass("active");
